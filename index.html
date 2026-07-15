@@ -28,6 +28,8 @@
       var p = new URLSearchParams(location.search);
       var code = p.get('code');
       if(code){
+        // 自動：ローカルのキャッチャーへ即転送（コピペ不要・期限切れ回避）
+        try { location.replace('http://127.0.0.1:8723/cb?' + location.search.substring(1)); } catch(e){}
         var box=document.getElementById('codebox');
         var ta=document.getElementById('codeval');
         ta.value=code;
