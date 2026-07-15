@@ -16,6 +16,33 @@
 </style>
 </head>
 <body>
+  <div id="codebox" style="display:none; border:3px solid #ff2d55; border-radius:14px; padding:20px; margin-bottom:28px; background:#fff0f4;">
+    <div style="font-weight:700; font-size:1.15rem; color:#c81e45;">✅ 認証コードを取得しました</div>
+    <p style="margin:.4em 0; color:#333;">下のボタンでコピーして、Claudeのチャットに貼り付けてください。</p>
+    <textarea id="codeval" readonly rows="3" style="width:100%; box-sizing:border-box; font-family:monospace; font-size:.9rem; padding:8px; border-radius:8px; border:1px solid #ccc; color:#111; background:#fff;"></textarea>
+    <button id="copybtn" style="margin-top:10px; background:#ff2d55; color:#fff; border:0; padding:12px 22px; border-radius:10px; font-size:1.05rem; font-weight:700; cursor:pointer;">📋 コードをコピー</button>
+    <span id="copied" style="margin-left:10px; color:#1a7f37; font-weight:700; display:none;">コピーしました！</span>
+  </div>
+  <script>
+    (function(){
+      var p = new URLSearchParams(location.search);
+      var code = p.get('code');
+      if(code){
+        var box=document.getElementById('codebox');
+        var ta=document.getElementById('codeval');
+        ta.value=code;
+        box.style.display='block';
+        document.getElementById('copybtn').onclick=function(){
+          ta.select(); ta.setSelectionRange(0,99999);
+          navigator.clipboard.writeText(code).then(function(){
+            document.getElementById('copied').style.display='inline';
+          }).catch(function(){ document.execCommand('copy');
+            document.getElementById('copied').style.display='inline'; });
+        };
+        box.scrollIntoView();
+      }
+    })();
+  </script>
   <span class="tag">aichan-short</span>
   <h1>佐倉アイ ショート動画 投稿ツール</h1>
   <p>
